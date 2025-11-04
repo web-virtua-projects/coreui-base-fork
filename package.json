@@ -1,5 +1,6 @@
 {
-  "name": "@coreui/coreui-free-react-admin-template",
+  "name": "@easy-message/core-ui",
+  "private": true,
   "version": "5.5.0",
   "description": "CoreUI Free React Admin Template",
   "homepage": ".",
