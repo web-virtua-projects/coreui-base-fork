@@ -1,10 +1,23 @@
-import React, { Suspense } from 'react';
+import { Suspense, ReactNode } from 'react';
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '@easy-message/core-ui/components';
 import { CContainer, CSpinner } from '@coreui/react';
 import { Route, Routes } from 'react-router-dom';
 import navigation from '@easy-message/core-ui/_nav';
 
-const CoreUILayout = ({ routes, header, footer }) => {
+interface RouteType {
+  path: string;
+  name: string;
+  element: React.ComponentType;
+  exact?: boolean; // Keep for compatibility if routes object has it
+}
+
+interface Props {
+  routes: RouteType[];
+  header?: ReactNode;
+  footer?: ReactNode;
+}
+
+const CoreUILayout = ({ routes, header, footer }: Props) => {
   return (
     <div>
       <AppSidebar navigation={navigation} />
@@ -14,13 +27,11 @@ const CoreUILayout = ({ routes, header, footer }) => {
           <AppContent>
             <Suspense fallback={<CContainer lg><CSpinner color="primary" /></CContainer>}>
               <Routes>
-                {routes.map((route, idx) => (
+                {routes.map((route: RouteType, idx: number) => (
                   route.element && (
                     <Route
                       key={idx}
                       path={route.path}
-                      exact={route.exact}
-                      name={route.name}
                       element={<route.element />}
                     />
                   )
