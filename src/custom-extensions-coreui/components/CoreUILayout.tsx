@@ -1,45 +1,21 @@
-import { Suspense, ReactNode } from 'react';
-import { AppContent, AppSidebar, AppFooter } from '@easy-message/core-ui/components';
-import { CContainer, CSpinner } from '@coreui/react';
-import { Route, Routes } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { AppSidebar, AppFooter, AppHeader } from '@easy-message/core-ui/components';
 import navigation from '@easy-message/core-ui/_nav';
-import CustomAppHeader from './CustomAppHeader'; // Import the custom header
-
-interface RouteType {
-  path: string;
-  name: string;
-  element: React.ComponentType;
-  exact?: boolean; // Keep for compatibility if routes object has it
-}
+import CustomAppContent from './CustomAppContent'; // Importa o novo content
 
 interface Props {
-  routes: RouteType[];
   header?: ReactNode;
   footer?: ReactNode;
 }
 
-const CoreUILayout = ({ routes, header, footer }: Props) => {
+const CoreUILayout = ({ header, footer }: Props) => {
   return (
     <div>
       <AppSidebar navigation={navigation} />
       <div className="wrapper d-flex flex-column min-vh-100">
-        {header || <CustomAppHeader />}
+        {header || <AppHeader />}
         <div className="body flex-grow-1 px-3">
-          <AppContent>
-            <Suspense fallback={<CContainer lg><CSpinner color="primary" /></CContainer>}>
-              <Routes>
-                {routes.map((route: RouteType, idx: number) => (
-                  route.element && (
-                    <Route
-                      key={idx}
-                      path={route.path}
-                      element={<route.element />}
-                    />
-                  )
-                ))}
-              </Routes>
-            </Suspense>
-          </AppContent>
+          <CustomAppContent />
         </div>
         {footer || <AppFooter />}
       </div>
