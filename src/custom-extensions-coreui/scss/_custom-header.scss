@@ -1,0 +1,17 @@
+// Aplica as variáveis diretamente ao seletor do header para aumentar a especificidade
+.header {
+  --cui-header-height: 3.3rem; // Altura reduzida
+
+  // Força a altura, sobrescrevendo qualquer min-height que possa existir
+  height: var(--cui-header-height);
+
+  // Remove o padding do header, pois o padding será aplicado no container interno
+  padding-top: 0 !important; 
+  padding-bottom: 0 !important; 
+
+  // Ajusta o padding do container interno para centralizar o conteúdo
+  .container-fluid {
+    padding-top: 0 !important; // Ajuste conforme necessário
+    padding-bottom: 0.7rem !important; // Ajuste conforme necessário
+  }
+}
