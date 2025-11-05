@@ -33,8 +33,20 @@ export default defineConfig(() => {
     resolve: {
       alias: [
         {
+          find: 'react',
+          replacement: `${path.resolve(__dirname, '../node_modules/react')}`,
+        },
+        {
+          find: 'react-dom',
+          replacement: `${path.resolve(__dirname, '../node_modules/react-dom')}`,
+        },
+        {
           find: 'src/',
           replacement: `${path.resolve(__dirname, 'src')}/`,
+        },
+        {
+          find: '@custom-extensions',
+          replacement: `${path.resolve(__dirname, 'src/custom-extensions-coreui')}`,
         },
       ],
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.scss'],
